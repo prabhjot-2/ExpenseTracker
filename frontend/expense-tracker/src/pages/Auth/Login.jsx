@@ -3,6 +3,8 @@ import AuthLayout from '../../components/layouts/AuthLayout'
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
+import axiosInstance from '../../utils/axiosinstance';
+import { API_PATHS } from '../../utils/apiPaths';
 
 const Login = () => {
   const [email,setEmail]= useState("");
@@ -24,6 +26,25 @@ const Login = () => {
     }
     setError("")
     // login Api call
+    try{
+      const response =await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
+        email,
+        password,
+      });
+      const {token,user}=response.data;
+
+      if(token){
+        localStorage.setItem("token",token);
+        navigate("/dashboard");
+      }
+    }
+    catch(error){
+      if(error.response && error.response.data.message){
+        setError(error.response.data.message);
+      }else{
+        setError("something  wrong .please try again");
+      }
+    }
   }
 
   return (
@@ -55,7 +76,7 @@ const Login = () => {
             LOGIN
           </button>
 
-          <p className='text-[13px' text-slate-800 mt-3>
+          <p className="text-[13px] text-slate-800 mt-3">
             Don't have an account?{" "}
             <Link className='font-medium text-primary underline ' to="/signup">
               SignUp
