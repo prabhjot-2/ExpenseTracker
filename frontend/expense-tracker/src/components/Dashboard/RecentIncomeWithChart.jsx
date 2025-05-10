@@ -25,7 +25,7 @@ const RecentIncomeWithChart = ({data, totalIncome}) => {
         data={chartData}
         label="Total Income"
         totalAmount={`$${totalIncome}`}
-        showTextAnchor
+        showTextAnchor={true}
         colors={COLORS}
       />
 

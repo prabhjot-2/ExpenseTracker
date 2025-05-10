@@ -47,7 +47,6 @@ const CustomPieChart = ({
               fill="#666"
               fontSize="14px"
             >
-              {" "}
               {label}
             </text>
 
@@ -60,7 +59,6 @@ const CustomPieChart = ({
               fontSize="24px"
               fontWeight="semi-bold"
             >
-              {" "}
               {totalAmount}
             </text>
           </>
