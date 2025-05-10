@@ -3,7 +3,26 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import CustomToolTip from './CustomToolTip';
 
 const CustomBarChart = ({data}) => {
-    // hje rehnda e custom color attack ho gya amritsar te
+  // function to get alternate colors for the bars4
+  const getBarColor=(index)=>{
+    return index%2===0 ? "#875cf5": "#cfbefb";
+  };
+
+  const CustomToolTip=({active,payload})=>{
+    if(active && payload && payload.length){
+      return(
+        <div className='bg-white shadow-md rounded-lg p-2 border-gray-300'>
+          <p className='text-xs font-semibold text-purple-800 mb-1' >
+            {payload[0].payload.category}
+          </p>
+          <p className='text-sm text-gray-600'>
+            Amount: <span className='text-sm font-medium text-gray-900'> ${payload[0].payload.amount}</span>
+          </p>
+        </div>
+      );
+    }
+    return null
+  }
   return (
     <div className='bg-white mt-6'>
     <ResponsiveContainer width="100%" height={300}>
